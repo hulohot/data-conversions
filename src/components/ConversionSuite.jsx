@@ -1,0 +1,57 @@
+import React, { useState } from 'react';
+import { Calculator } from "lucide-react";
+import { BaseConverter } from './BaseConverter';
+import { TimeFreq } from './TimeFreq';
+import { ModuleManager } from './ModuleManager';
+
+export default function ConversionSuite() {
+  const registry = {
+    base: { title: "Base Converter", node: <BaseConverter /> },
+    timefreq: { title: "Time ↔ Frequency", node: <TimeFreq /> },
+  };
+
+  const defaultModules = [
+    { key: "base", title: registry.base.title, visible: true },
+    { key: "timefreq", title: registry.timefreq.title, visible: true },
+  ];
+
+  const [modules, setModules] = useState(() => {
+    try {
+      const saved = localStorage.getItem("ce-conv-modules");
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // Ignore errors when parsing localStorage
+    }
+    return defaultModules;
+  });
+
+  return (
+    <div className="min-h-screen w-full bg-gradient-to-br from-zinc-950 via-black to-zinc-900 text-zinc-100">
+      <header className="sticky top-0 z-10 backdrop-blur bg-black/40 border-b border-zinc-800">
+        <div className="w-[70%] mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-xl bg-indigo-600 grid place-items-center shadow-lg"><Calculator size={18} /></div>
+            <div>
+              <h1 className="text-xl font-semibold tracking-wide">CE Dark Conversions</h1>
+              <p className="text-xs text-zinc-400">Everyday engineering calculators</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <ModuleManager modules={modules} setModules={setModules} />
+            <a href="#" className="text-xs text-zinc-400 hover:text-zinc-200">v0.4.0</a>
+          </div>
+        </div>
+      </header>
+      <main className="w-[70%] mx-auto px-4 py-6 space-y-6">
+        <div className="space-y-5">
+          {modules.filter((m) => m.visible).map((m) => (
+            <React.Fragment key={m.key}>{registry[m.key]?.node}</React.Fragment>
+          ))}
+        </div>
+      </main>
+      <footer className="w-[70%] mx-auto px-4 pb-10 pt-4 text-xs text-zinc-500">
+        <p>Tips: Use underscores in numbers for readability. Signed two's complement view is available for binary input.</p>
+      </footer>
+    </div>
+  );
+}
