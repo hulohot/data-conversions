@@ -2,17 +2,35 @@ import React, { useState } from 'react';
 import { Calculator } from "lucide-react";
 import { BaseConverter } from './BaseConverter';
 import { TimeFreq } from './TimeFreq';
+import { PadBinary } from './PadBinary';
+import { SizeConverter } from './SizeConverter';
+import { Throughput } from './Throughput';
+import { AsciiHex } from './AsciiHex';
+import { Pow2Calculator } from './Pow2Calculator';
+import { BitInverter } from './BitInverter';
 import { ModuleManager } from './ModuleManager';
 
 export default function ConversionSuite() {
   const registry = {
+    inverter: { title: "Bit Inverter", node: <BitInverter /> },
+    pow2: { title: "2^n Calculator", node: <Pow2Calculator /> },
     base: { title: "Base Converter", node: <BaseConverter /> },
     timefreq: { title: "Time ↔ Frequency", node: <TimeFreq /> },
+    pad: { title: "Pad Binary", node: <PadBinary /> },
+    size: { title: "Size Converter", node: <SizeConverter /> },
+    throughput: { title: "Throughput", node: <Throughput /> },
+    ascii: { title: "ASCII ↔ Hex", node: <AsciiHex /> },
   };
 
   const defaultModules = [
+    { key: "inverter", title: registry.inverter.title, visible: true },
+    { key: "pow2", title: registry.pow2.title, visible: true },
     { key: "base", title: registry.base.title, visible: true },
     { key: "timefreq", title: registry.timefreq.title, visible: true },
+    { key: "pad", title: registry.pad.title, visible: true },
+    { key: "size", title: registry.size.title, visible: true },
+    { key: "throughput", title: registry.throughput.title, visible: true },
+    { key: "ascii", title: registry.ascii.title, visible: true },
   ];
 
   const [modules, setModules] = useState(() => {

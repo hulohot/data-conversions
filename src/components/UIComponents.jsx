@@ -1,5 +1,5 @@
 import React from 'react';
-import { Copy, RefreshCcw, Calculator, Info, Check } from "lucide-react";
+import { Copy, RefreshCcw, Calculator, Info, Check, SwitchCamera } from "lucide-react";
 import { useClipboard, formatNumber } from '../utils/conversionUtils';
 
 export function ToolCard({ title, icon, children, footer }) {
