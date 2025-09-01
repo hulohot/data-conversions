@@ -36,7 +36,15 @@ export default function ConversionSuite() {
   const [modules, setModules] = useState(() => {
     try {
       const saved = localStorage.getItem("ce-conv-modules");
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Ensure all modules exist and are visible
+        const merged = defaultModules.map(defaultModule => {
+          const savedModule = parsed.find(m => m.key === defaultModule.key);
+          return savedModule || defaultModule;
+        });
+        return merged;
+      }
     } catch {
       // Ignore errors when parsing localStorage
     }
