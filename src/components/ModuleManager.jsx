@@ -23,10 +23,14 @@ export function ModuleManager({ modules, setModules }) {
 
   return (
     <div className="relative group" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <div className="cursor-pointer select-none text-xs px-3 py-1 rounded-full border border-zinc-700 bg-zinc-900/60 text-zinc-300 hover:text-zinc-100 hover:border-zinc-500 transition">
+      <div
+        className="cursor-pointer select-none text-xs px-3 py-2 rounded-full border border-zinc-700 bg-zinc-900/60 text-zinc-300 hover:text-zinc-100 hover:border-zinc-500 transition touch-manipulation"
+        onClick={() => setOpen(!open)}
+        onTouchStart={(e) => e.preventDefault()}
+      >
         Arrange
       </div>
-      <div className={`absolute right-0 mt-2 w-72 rounded-2xl border border-zinc-800 bg-black/80 backdrop-blur p-3 shadow-2xl ${open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"} transition-all duration-200`}
+      <div className={`absolute right-0 mt-2 w-64 sm:w-72 max-w-[calc(100vw-2rem)] rounded-lg sm:rounded-2xl border border-zinc-800 bg-black/80 backdrop-blur p-3 shadow-2xl ${open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"} transition-all duration-200`}
         onDragOver={onDragOver}
       >
         <div className="text-xs text-zinc-400 mb-2">Drag to reorder • Toggle to show/hide</div>
