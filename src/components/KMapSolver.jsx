@@ -33,7 +33,6 @@ class KarnaughMap {
   getGrayCodePosition(minterm) {
     const binary = minterm.toString(2).padStart(this.numVars, '0');
     const rowVars = Math.ceil(this.numVars / 2);
-    const colVars = Math.floor(this.numVars / 2);
 
     const rowBinary = binary.slice(0, rowVars);
     const colBinary = binary.slice(rowVars);

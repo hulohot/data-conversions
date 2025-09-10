@@ -1,7 +1,7 @@
 {
   "name": "data-conversions",
   "private": true,
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "CE Dark Conversions - Everyday engineering calculators for base conversion, time-frequency conversion, and more",
   "author": "CE Dark Conversions",
   "type": "module",

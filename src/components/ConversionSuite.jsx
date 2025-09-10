@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calculator } from "lucide-react";
 import { version } from '../../package.json';
 import { BaseConverter } from './BaseConverter';
@@ -19,6 +19,7 @@ export default function ConversionSuite() {
     // Sidebar starts closed by default
     return false;
   });
+  const [filterQuery, setFilterQuery] = useState("");
 
   const registry = {
     inverter: { title: "Bit Inverter", node: <BitInverter /> },
@@ -53,18 +54,33 @@ export default function ConversionSuite() {
       const saved = localStorage.getItem("ce-conv-modules");
       if (saved) {
         const parsed = JSON.parse(saved);
-        // Ensure all modules exist and are visible
-        const merged = defaultModules.map(defaultModule => {
-          const savedModule = parsed.find(m => m.key === defaultModule.key);
-          return savedModule || defaultModule;
-        });
-        return merged;
+        // Preserve saved order; re-hydrate titles from registry; append any new defaults
+        const seen = new Set();
+        const validSaved = Array.isArray(parsed)
+          ? parsed
+              .filter((m) => m && registry[m.key])
+              .map((m) => {
+                seen.add(m.key);
+                return { key: m.key, title: registry[m.key].title, visible: Boolean(m.visible) };
+              })
+          : [];
+        const missing = defaultModules.filter((d) => !seen.has(d.key));
+        return [...validSaved, ...missing];
       }
     } catch {
       // Ignore errors when parsing localStorage
     }
     return defaultModules;
   });
+
+  // Persist module state on desktop as well (previously only mobile saved via ModuleManager)
+  useEffect(() => {
+    try {
+      localStorage.setItem("ce-conv-modules", JSON.stringify(modules));
+    } catch {
+      // Swallow persistence errors silently
+    }
+  }, [modules]);
 
   const isDesktop = typeof window !== 'undefined' && !('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
@@ -85,20 +101,34 @@ export default function ConversionSuite() {
               </button>
             </div>
             <p className="text-xs text-zinc-400">Drag to reorder • Toggle to show/hide</p>
+            <div className="mt-3">
+              <input
+                type="text"
+                value={filterQuery}
+                onChange={(e) => setFilterQuery(e.target.value)}
+                placeholder="Filter tools..."
+                className="w-full rounded-lg bg-zinc-950 border border-zinc-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-zinc-200 placeholder-zinc-500"
+                aria-label="Filter tools"
+              />
+            </div>
           </div>
 
           {/* Tools List */}
           <div className="p-4">
             <ul className="space-y-2">
-              {modules.map((m, i) => (
+              {modules
+                .filter((m) => m.title.toLowerCase().includes(filterQuery.trim().toLowerCase()))
+                .map((m, i) => (
                 <li key={m.key}
-                    draggable
+                    draggable={filterQuery.trim() === ''}
                     onDragStart={(e) => {
+                      if (filterQuery.trim() !== '') return;
                       e.dataTransfer.setData("text/plain", String(i));
                     }}
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={(e) => {
                       e.preventDefault();
+                      if (filterQuery.trim() !== '') return;
                       const from = Number(e.dataTransfer.getData("text/plain"));
                       if (Number.isNaN(from) || from === i) return;
                       const next = [...modules];
@@ -106,9 +136,10 @@ export default function ConversionSuite() {
                       next.splice(i, 0, moved);
                       setModules(next);
                     }}
-                    className="flex items-center justify-between gap-2 px-3 py-3 rounded-xl bg-zinc-950 border border-zinc-800 hover:border-zinc-700 transition-colors cursor-move">
+                    className={`flex items-center justify-between gap-2 px-3 py-3 rounded-xl bg-zinc-950 border border-zinc-800 hover:border-zinc-700 transition-colors ${filterQuery.trim() === '' ? 'cursor-move' : ''}`}
+                >
                   <div className="flex items-center gap-3 flex-1">
-                    <span className="font-mono text-zinc-400 cursor-grab">≡</span>
+                    <span className={`font-mono text-zinc-400 ${filterQuery.trim() === '' ? 'cursor-grab' : ''}`}>≡</span>
                     <span className="text-sm text-zinc-200 flex-1">{m.title}</span>
                   </div>
                   <label className="inline-flex items-center gap-2 text-xs text-zinc-300">

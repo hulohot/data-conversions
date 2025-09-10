@@ -143,7 +143,8 @@ data-conversions/
 ### Module Management
 - Drag-and-drop reordering of calculator modules
 - Show/hide individual calculators
-- Settings persist in localStorage
+- Settings persist in localStorage (order and visibility)
+- Quick filter to find tools by name
 
 ## Customization
 
@@ -170,4 +171,10 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - Original concept from ChatGPT Canvas
 - Icons from [Lucide](https://lucide.dev/)
-- Font from [Google Fonts](https://fonts.google.com/)# Test trigger
+- Font from [Google Fonts](https://fonts.google.com/)
+
+## Changelog
+
+- 0.4.6
+  - Fix: Persist desktop Tool Manager state (order + visibility)
+  - Feature: Add tool filter (desktop + mobile managers)

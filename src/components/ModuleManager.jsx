@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export function ModuleManager({ modules, setModules }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [filterQuery, setFilterQuery] = useState("");
   const containerRef = useRef(null);
   const isMobile = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
@@ -57,11 +58,21 @@ export function ModuleManager({ modules, setModules }) {
       </div>
       <div className={`absolute right-0 mt-2 w-64 sm:w-72 max-w-[calc(100vw-2rem)] rounded-lg sm:rounded-2xl border border-zinc-800 bg-black/80 backdrop-blur p-3 shadow-2xl ${mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"} transition-all duration-200 z-50`}
       >
-        <div className="text-xs text-zinc-400 mb-2">
-          Tap to toggle visibility
+        <div className="text-xs text-zinc-400 mb-2">Tap to toggle visibility</div>
+        <div className="mb-2">
+          <input
+            type="text"
+            value={filterQuery}
+            onChange={(e) => setFilterQuery(e.target.value)}
+            placeholder="Filter tools..."
+            className="w-full rounded-lg bg-zinc-950 border border-zinc-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500 text-xs text-zinc-200 placeholder-zinc-500"
+            aria-label="Filter tools"
+          />
         </div>
         <ul className="space-y-2">
-          {modules.map((m, i) => (
+          {modules
+            .filter((m) => m.title.toLowerCase().includes(filterQuery.trim().toLowerCase()))
+            .map((m) => (
             <li key={m.key}
                 className="flex items-center justify-between gap-2 px-2 py-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 touch-manipulation">
               <div className="flex items-center gap-2 flex-1">

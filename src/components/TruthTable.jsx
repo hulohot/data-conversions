@@ -52,6 +52,7 @@ class BooleanExpression {
       // Evaluate the expression
       return this.evalBoolean(expr);
     } catch (e) {
+      console.error(e);
       return null;
     }
   }
@@ -163,7 +164,6 @@ class BooleanExpression {
 
 export function TruthTable() {
   const [expression, setExpression] = useState("A ∧ B | ¬C");
-  const [showSteps, setShowSteps] = useState(false);
 
   const truthTable = useMemo(() => {
     if (!expression.trim()) return null;
@@ -173,7 +173,7 @@ export function TruthTable() {
         expression: boolExpr,
         table: boolExpr.generateTruthTable()
       };
-    } catch (e) {
+    } catch {
       return null;
     }
   }, [expression]);
