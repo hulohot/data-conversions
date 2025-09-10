@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calculator } from "lucide-react";
+import { version } from '../../package.json';
 import { BaseConverter } from './BaseConverter';
 import { TimeFreq } from './TimeFreq';
 import { PadBinary } from './PadBinary';
@@ -155,7 +156,7 @@ export default function ConversionSuite() {
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             {!isDesktop && <ModuleManager modules={modules} setModules={setModules} />}
-            <a href="#" className="text-xs text-zinc-400 hover:text-zinc-200">v0.4.2</a>
+            <a href="#" className="text-xs text-zinc-400 hover:text-zinc-200">v{version}</a>
           </div>
         </div>
       </header>
