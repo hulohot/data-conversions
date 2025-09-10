@@ -12,6 +12,7 @@ import { BitInverter } from './BitInverter';
 import { TruthTable } from './TruthTable';
 import { KMapSolver } from './KMapSolver';
 import { XorCalculator } from './XorCalculator';
+import { AESCalculator } from './AESCalculator';
 import { ModuleManager } from './ModuleManager';
 
 export default function ConversionSuite() {
@@ -33,6 +34,7 @@ export default function ConversionSuite() {
     truthtable: { title: "Truth Table", node: <TruthTable /> },
     kmap: { title: "K-Map Solver", node: <KMapSolver /> },
     xor: { title: "XOR Calculator", node: <XorCalculator /> },
+    aes: { title: "AES Calculator", node: <AESCalculator /> },
   };
 
   const defaultModules = [
@@ -47,6 +49,7 @@ export default function ConversionSuite() {
     { key: "truthtable", title: registry.truthtable.title, visible: true },
     { key: "kmap", title: registry.kmap.title, visible: true },
     { key: "xor", title: registry.xor.title, visible: true },
+    { key: "aes", title: registry.aes.title, visible: true },
   ];
 
   const [modules, setModules] = useState(() => {
