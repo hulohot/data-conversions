@@ -61,7 +61,24 @@ export function BitInverter() {
     <ToolCard
       title="Bit Inverter (MSB⇄LSB)"
       icon={<SwitchCamera className="text-indigo-400" size={18} />}
-      footer={<span>Reverses bit order of the value; output stays in the same base.</span>}
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">1101 → 1011 (MSB↔LSB swap)</span>
+          </div>
+          <div className="text-xs">
+            <span>Reverses bit order (MSB becomes LSB). Useful for endianness conversion or bit manipulation. </span>
+            <a href="https://en.wikipedia.org/wiki/Bit_numbering" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn about bit numbering
+            </a>
+            {" | "}
+            <a href="https://en.wikipedia.org/wiki/Endianness" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Endianness
+            </a>
+          </div>
+        </div>
+      }
     >
       <Row>
         <div>

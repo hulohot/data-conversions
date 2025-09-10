@@ -13,6 +13,15 @@ A beautiful, dark-themed React web application featuring various engineering cal
 - **ASCII ↔ Hex Converter**: Convert between ASCII text and hexadecimal representations
 - **2^n Calculator**: Compute powers of two and related values
 - **Bit Inverter**: Reverse bit order (MSB↔LSB) in various bases
+- **K-Map Solver**: Simplify Boolean expressions using Karnaugh maps
+- **Truth Table Generator**: Generate complete truth tables for Boolean expressions
+- **XOR Calculator**: Perform bitwise XOR operations with multi-base support
+
+### Built-in Documentation
+Each calculator includes:
+- **Real examples** with expected inputs and outputs
+- **Educational links** to Wikipedia and other reputable sources
+- **Clear explanations** of concepts and use cases
 
 ## Tech Stack
 

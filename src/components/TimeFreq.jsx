@@ -41,7 +41,28 @@ export function TimeFreq() {
   const reset = () => { setPeriodVal(""); setFreqVal(""); };
 
   return (
-    <ToolCard title="Time ↔ Frequency" icon={<Calculator className="text-indigo-400" size={18} />} footer={<span>Enter either a period or a frequency. Outputs update automatically.</span>}>
+    <ToolCard 
+      title="Time ↔ Frequency" 
+      icon={<Calculator className="text-indigo-400" size={18} />} 
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">10 ns period = 100 MHz frequency</span>
+          </div>
+          <div className="text-xs">
+            <span>Convert between time period and frequency (T = 1/f). Enter either value to calculate the other. </span>
+            <a href="https://en.wikipedia.org/wiki/Frequency" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn about frequency
+            </a>
+            {" | "}
+            <a href="https://en.wikipedia.org/wiki/Clock_signal" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Clock signals
+            </a>
+          </div>
+        </div>
+      }
+    >
       <Row>
         <div>
           <Label>Period</Label>

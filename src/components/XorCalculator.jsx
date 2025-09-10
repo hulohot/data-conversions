@@ -64,8 +64,21 @@ export function XorCalculator() {
       title="XOR Calculator"
       icon={<Zap className="text-indigo-400" size={18} />}
       footer={
-        <div className="flex items-start gap-2">
-          <span>Perform bitwise XOR operation on two values. Results shown in all bases with optional bit padding.</span>
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">1101 XOR 1011 = 0110 (different bits → 1)</span>
+          </div>
+          <div className="text-xs">
+            <span>Perform bitwise XOR (exclusive OR) operation on two values. Result is 1 when bits differ, 0 when same. </span>
+            <a href="https://en.wikipedia.org/wiki/Exclusive_or" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn about XOR
+            </a>
+            {" | "}
+            <a href="https://en.wikipedia.org/wiki/Bitwise_operation" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Bitwise operations
+            </a>
+          </div>
         </div>
       }
     >

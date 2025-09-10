@@ -261,9 +261,24 @@ export function KMapSolver() {
       title="K-Map Solver"
       icon={<Grid3X3 className="text-indigo-400" size={18} />}
       footer={
-        <div className="flex items-start gap-2">
-          <Info size={14} className="mt-0.5"/>
-          <span>Enter minterm indices separated by commas. For {numVars} variables, valid range is 0-{Math.pow(2, numVars) - 1}.</span>
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">Minterms "0,1,3,7" → Simplified Boolean expression</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <Info size={14} className="mt-0.5"/>
+            <div className="text-xs">
+              <span>Simplify Boolean expressions using Karnaugh maps. Enter minterm indices (0-{Math.pow(2, numVars) - 1} for {numVars} variables). </span>
+              <a href="https://en.wikipedia.org/wiki/Karnaugh_map" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+                Learn about Karnaugh maps
+              </a>
+              {" | "}
+              <a href="https://en.wikipedia.org/wiki/Boolean_algebra" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+                Boolean algebra
+              </a>
+            </div>
+          </div>
         </div>
       }
     >

@@ -29,7 +29,24 @@ export function Throughput() {
     <ToolCard
       title="Throughput from Bus × Clock"
       icon={<Calculator className="text-indigo-400" size={18} />}
-      footer={<span>Assumes one data transfer per clock.</span>}
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">32-bit @ 100 MHz = 3.2 Gb/s = 400 MB/s</span>
+          </div>
+          <div className="text-xs">
+            <span>Calculate data throughput from bus width and clock frequency. Assumes one transfer per clock cycle. </span>
+            <a href="https://en.wikipedia.org/wiki/Throughput" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn about throughput
+            </a>
+            {" | "}
+            <a href="https://en.wikipedia.org/wiki/Bus_(computing)" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Computer bus
+            </a>
+          </div>
+        </div>
+      }
     >
       <Row>
         <div>

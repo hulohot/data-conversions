@@ -212,9 +212,24 @@ export function TruthTable() {
       title="Truth Table Generator"
       icon={<Calculator className="text-indigo-400" size={18} />}
       footer={
-        <div className="flex items-start gap-2">
-          <Info size={14} className="mt-0.5"/>
-          <span>Use ∧ (AND), | ∨ (OR), ¬ ~ (NOT), ⊕ ^ (XOR), & (AND). Variables are single letters (A-Z). Example: A ∧ B | ¬C</span>
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">"A ∧ B | ¬C" generates complete truth table</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <Info size={14} className="mt-0.5"/>
+            <div className="text-xs">
+              <span>Generate truth tables for Boolean expressions. Use ∧ (AND), | ∨ (OR), ¬ ~ (NOT), ⊕ ^ (XOR). Variables: A-Z. </span>
+              <a href="https://en.wikipedia.org/wiki/Truth_table" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+                Learn about truth tables
+              </a>
+              {" | "}
+              <a href="https://en.wikipedia.org/wiki/Boolean_algebra" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+                Boolean algebra
+              </a>
+            </div>
+          </div>
         </div>
       }
     >
