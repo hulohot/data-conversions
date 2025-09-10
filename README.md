@@ -170,4 +170,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - Original concept from ChatGPT Canvas
 - Icons from [Lucide](https://lucide.dev/)
-- Font from [Google Fonts](https://fonts.google.com/)
+- Font from [Google Fonts](https://fonts.google.com/)# Test trigger
