@@ -26,7 +26,20 @@ export function AsciiHex() {
     <ToolCard
       title="ASCII ↔ Hex"
       icon={<Calculator className="text-indigo-400" size={18} />}
-      footer={<span>Handy for quick protocol/debug work.</span>}
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">"Hello" → 48 65 6c 6c 6f</span>
+          </div>
+          <div className="text-xs">
+            <span>Convert between ASCII text and hexadecimal representation. </span>
+            <a href="https://en.wikipedia.org/wiki/ASCII" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn more about ASCII
+            </a>
+          </div>
+        </div>
+      }
     >
       <Row>
         <div>

@@ -21,7 +21,20 @@ export function PadBinary() {
     <ToolCard
       title="Pad Binary"
       icon={<Calculator className="text-indigo-400" size={18} />}
-      footer={<span>Quickly left/right pad a binary string with zeros to a specific length.</span>}
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">"1011" → "00001011" (8-bit left padding)</span>
+          </div>
+          <div className="text-xs">
+            <span>Pad binary strings with zeros to match specific bit widths. Essential for fixed-width data formats. </span>
+            <a href="https://en.wikipedia.org/wiki/Binary_number" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn about binary numbers
+            </a>
+          </div>
+        </div>
+      }
     >
       <Row>
         <div>

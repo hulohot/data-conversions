@@ -50,7 +50,27 @@ export function BaseConverter() {
     <ToolCard
       title="Base & Two's Complement"
       icon={<Calculator className="text-indigo-400" size={18} />}
-      footer={<div className="flex items-start gap-2"><Info size={14} className="mt-0.5"/><span>Enter value and choose the input base. Toggle two's complement to interpret a binary string as signed. Use "Target Bits" to zero-pad the binary output.</span></div>}
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">255 (dec) → 11111111 (bin) → FF (hex)</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <Info size={14} className="mt-0.5"/>
+            <div className="text-xs">
+              <span>Convert between binary, octal, decimal, and hexadecimal bases. Supports two's complement for signed binary interpretation. </span>
+              <a href="https://en.wikipedia.org/wiki/Positional_notation" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+                Learn about positional notation
+              </a>
+              {" | "}
+              <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+                Two's complement
+              </a>
+            </div>
+          </div>
+        </div>
+      }
     >
       <Row>
         <div>

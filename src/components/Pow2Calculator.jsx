@@ -32,7 +32,24 @@ export function Pow2Calculator() {
     <ToolCard
       title="2^n Calculator"
       icon={<Calculator className="text-indigo-400" size={18} />}
-      footer={<span>Compute powers of two and related limits.</span>}
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">2¹⁰ = 1024 (1 KiB), max 10-bit unsigned = 1023</span>
+          </div>
+          <div className="text-xs">
+            <span>Calculate powers of 2, bit limits, and memory sizes. Essential for understanding computer memory and data types. </span>
+            <a href="https://en.wikipedia.org/wiki/Power_of_two" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn about powers of two
+            </a>
+            {" | "}
+            <a href="https://en.wikipedia.org/wiki/Binary_prefix" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Binary prefixes
+            </a>
+          </div>
+        </div>
+      }
     >
       <Row>
         <div>

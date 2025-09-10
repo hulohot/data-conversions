@@ -32,7 +32,24 @@ export function SizeConverter() {
     <ToolCard
       title="Size Converter (bits/bytes, IEC & SI)"
       icon={<Calculator className="text-indigo-400" size={18} />}
-      footer={<span>Converts between bits, bytes, and IEC vs SI prefixes.</span>}
+      footer={
+        <div className="space-y-2">
+          <div>
+            <span className="text-zinc-400">Example: </span>
+            <span className="font-mono text-zinc-300">1 KB = 1000 bytes (SI) vs 1 KiB = 1024 bytes (IEC)</span>
+          </div>
+          <div className="text-xs">
+            <span>Convert between different size units, distinguishing SI (decimal) and IEC (binary) prefixes. </span>
+            <a href="https://en.wikipedia.org/wiki/Binary_prefix" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Learn about binary prefixes
+            </a>
+            {" | "}
+            <a href="https://en.wikipedia.org/wiki/Byte" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline">
+              Byte definition
+            </a>
+          </div>
+        </div>
+      }
     >
       <Row>
         <div>
