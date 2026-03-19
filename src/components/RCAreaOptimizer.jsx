@@ -6,36 +6,55 @@ import {
   Label,
   NumberInput,
   Row,
+  Select,
   TextInput
 } from './UIComponents';
 
-const FARADS_PER_FEMTOFARAD = 1e-15;
-const SECONDS_PER_MICROSECOND = 1e-6;
+const CAP_DENSITY_UNITS = [
+  { key: "ff", label: "fF/um^2", factor: 1e-15 },
+  { key: "pf", label: "pF/um^2", factor: 1e-12 },
+  { key: "nf", label: "nF/um^2", factor: 1e-9 },
+  { key: "uf", label: "uF/um^2", factor: 1e-6 },
+  { key: "f", label: "F/um^2", factor: 1 },
+];
+
+const TAU_UNITS = [
+  { key: "ns", label: "ns", factor: 1e-9 },
+  { key: "us", label: "us", factor: 1e-6 },
+  { key: "ms", label: "ms", factor: 1e-3 },
+  { key: "s", label: "s", factor: 1 },
+];
 
 export function RCAreaOptimizer() {
-  const [capDensityFf, setCapDensityFf] = useState(1);
+  const [capDensity, setCapDensity] = useState(1);
+  const [capDensityUnit, setCapDensityUnit] = useState("ff");
   const [sheetResistance, setSheetResistance] = useState(100);
   const [resistorWidth, setResistorWidth] = useState(1);
-  const [tauUs, setTauUs] = useState(0.001);
+  const [tau, setTau] = useState(0.001);
+  const [tauUnit, setTauUnit] = useState("us");
 
   const optimalValues = useMemo(() => {
-    const values = [capDensityFf, sheetResistance, resistorWidth, tauUs];
+    const values = [capDensity, sheetResistance, resistorWidth, tau];
     const allValid = values.every((value) => isFinite(value) && value > 0);
     if (!allValid) return null;
 
-    const capDensity = capDensityFf * FARADS_PER_FEMTOFARAD;
-    const tau = tauUs * SECONDS_PER_MICROSECOND;
-    const denominator = capDensity * resistorWidth ** 2;
+    const capDensityScale = CAP_DENSITY_UNITS.find((unit) => unit.key === capDensityUnit)?.factor;
+    const tauScale = TAU_UNITS.find((unit) => unit.key === tauUnit)?.factor;
+    if (!capDensityScale || !tauScale) return null;
+
+    const capDensityFarads = capDensity * capDensityScale;
+    const tauSeconds = tau * tauScale;
+    const denominator = capDensityFarads * resistorWidth ** 2;
     if (!isFinite(denominator) || denominator <= 0) return null;
 
-    const resistance = Math.sqrt((tau * sheetResistance) / denominator);
+    const resistance = Math.sqrt((tauSeconds * sheetResistance) / denominator);
     if (!isFinite(resistance) || resistance <= 0) return null;
 
-    const capacitance = tau / resistance;
+    const capacitance = tauSeconds / resistance;
     if (!isFinite(capacitance) || capacitance <= 0) return null;
 
     return { resistance, capacitance };
-  }, [capDensityFf, resistorWidth, sheetResistance, tauUs]);
+  }, [capDensity, capDensityUnit, resistorWidth, sheetResistance, tau, tauUnit]);
 
   return (
     <ToolCard
@@ -49,7 +68,7 @@ export function RCAreaOptimizer() {
           </div>
           <div>
             <span className="text-zinc-400">Units: </span>
-            <span className="font-mono text-zinc-300">Cdensity [fF/um^2], Rsheet [ohms/square], W [um], tau [us]</span>
+            <span className="font-mono text-zinc-300">Cdensity [selectable], Rsheet [ohms/square], W [um], tau [selectable]</span>
           </div>
           <div>
             <span className="text-zinc-400">Example: </span>
@@ -60,8 +79,15 @@ export function RCAreaOptimizer() {
     >
       <Row>
         <div>
-          <Label>Capacitance Density (fF/um^2)</Label>
-          <NumberInput value={capDensityFf} onChange={setCapDensityFf} />
+          <Label>Capacitance Density</Label>
+          <div className="grid grid-cols-2 gap-2">
+            <NumberInput value={capDensity} onChange={setCapDensity} />
+            <Select
+              value={capDensityUnit}
+              onChange={setCapDensityUnit}
+              options={CAP_DENSITY_UNITS.map((unit) => ({ label: unit.label, value: unit.key }))}
+            />
+          </div>
         </div>
         <div>
           <Label>Sheet Resistance (ohms/square)</Label>
@@ -74,8 +100,15 @@ export function RCAreaOptimizer() {
           <NumberInput value={resistorWidth} onChange={setResistorWidth} />
         </div>
         <div>
-          <Label>Target tau (R*C microseconds)</Label>
-          <NumberInput value={tauUs} onChange={setTauUs} />
+          <Label>Target tau (R*C)</Label>
+          <div className="grid grid-cols-2 gap-2">
+            <NumberInput value={tau} onChange={setTau} />
+            <Select
+              value={tauUnit}
+              onChange={setTauUnit}
+              options={TAU_UNITS.map((unit) => ({ label: unit.label, value: unit.key }))}
+            />
+          </div>
         </div>
       </Row>
       <Row>
