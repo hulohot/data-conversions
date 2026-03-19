@@ -14,6 +14,7 @@ import { KMapSolver } from './KMapSolver';
 import { XorCalculator } from './XorCalculator';
 import { AESCalculator } from './AESCalculator';
 import { ThermalNoise } from './ThermalNoise';
+import { RCAreaOptimizer } from './RCAreaOptimizer';
 import { ModuleManager } from './ModuleManager';
 
 export default function ConversionSuite() {
@@ -37,6 +38,7 @@ export default function ConversionSuite() {
     xor: { title: "XOR Calculator", node: <XorCalculator /> },
     aes: { title: "AES Calculator", node: <AESCalculator /> },
     thermalNoise: { title: "Thermal Noise", node: <ThermalNoise /> },
+    rcAreaOptimizer: { title: "RC Area Optimizer", node: <RCAreaOptimizer /> },
   };
 
   const defaultModules = [
@@ -53,6 +55,7 @@ export default function ConversionSuite() {
     { key: "xor", title: registry.xor.title, visible: true },
     { key: "aes", title: registry.aes.title, visible: true },
     { key: "thermalNoise", title: registry.thermalNoise.title, visible: true },
+    { key: "rcAreaOptimizer", title: registry.rcAreaOptimizer.title, visible: true },
   ];
 
   const [modules, setModules] = useState(() => {
