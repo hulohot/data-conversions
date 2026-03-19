@@ -13,6 +13,7 @@ import { TruthTable } from './TruthTable';
 import { KMapSolver } from './KMapSolver';
 import { XorCalculator } from './XorCalculator';
 import { AESCalculator } from './AESCalculator';
+import { ThermalNoise } from './ThermalNoise';
 import { ModuleManager } from './ModuleManager';
 
 export default function ConversionSuite() {
@@ -35,6 +36,7 @@ export default function ConversionSuite() {
     kmap: { title: "K-Map Solver", node: <KMapSolver /> },
     xor: { title: "XOR Calculator", node: <XorCalculator /> },
     aes: { title: "AES Calculator", node: <AESCalculator /> },
+    thermalNoise: { title: "Thermal Noise", node: <ThermalNoise /> },
   };
 
   const defaultModules = [
@@ -50,6 +52,7 @@ export default function ConversionSuite() {
     { key: "kmap", title: registry.kmap.title, visible: true },
     { key: "xor", title: registry.xor.title, visible: true },
     { key: "aes", title: registry.aes.title, visible: true },
+    { key: "thermalNoise", title: registry.thermalNoise.title, visible: true },
   ];
 
   const [modules, setModules] = useState(() => {
