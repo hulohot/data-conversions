@@ -9,17 +9,22 @@ import {
   TextInput
 } from './UIComponents';
 
+const FARADS_PER_FEMTOFARAD = 1e-15;
+const SECONDS_PER_MICROSECOND = 1e-6;
+
 export function RCAreaOptimizer() {
-  const [capDensity, setCapDensity] = useState(1e-15);
+  const [capDensityFf, setCapDensityFf] = useState(1);
   const [sheetResistance, setSheetResistance] = useState(100);
   const [resistorWidth, setResistorWidth] = useState(1);
-  const [tau, setTau] = useState(1e-9);
+  const [tauUs, setTauUs] = useState(0.001);
 
   const optimalValues = useMemo(() => {
-    const values = [capDensity, sheetResistance, resistorWidth, tau];
+    const values = [capDensityFf, sheetResistance, resistorWidth, tauUs];
     const allValid = values.every((value) => isFinite(value) && value > 0);
     if (!allValid) return null;
 
+    const capDensity = capDensityFf * FARADS_PER_FEMTOFARAD;
+    const tau = tauUs * SECONDS_PER_MICROSECOND;
     const denominator = capDensity * resistorWidth ** 2;
     if (!isFinite(denominator) || denominator <= 0) return null;
 
@@ -30,7 +35,7 @@ export function RCAreaOptimizer() {
     if (!isFinite(capacitance) || capacitance <= 0) return null;
 
     return { resistance, capacitance };
-  }, [capDensity, resistorWidth, sheetResistance, tau]);
+  }, [capDensityFf, resistorWidth, sheetResistance, tauUs]);
 
   return (
     <ToolCard
@@ -44,19 +49,19 @@ export function RCAreaOptimizer() {
           </div>
           <div>
             <span className="text-zinc-400">Units: </span>
-            <span className="font-mono text-zinc-300">Cdensity [F/um^2], Rsheet [ohms/square], W [um], tau [s]</span>
+            <span className="font-mono text-zinc-300">Cdensity [fF/um^2], Rsheet [ohms/square], W [um], tau [us]</span>
           </div>
           <div>
             <span className="text-zinc-400">Example: </span>
-            <span className="font-mono text-zinc-300">tau=1e-9, Rsheet=100, Cdensity=1e-15, W=1 -&gt; Ropt~1e4 ohms, Copt~1e-13 F</span>
+            <span className="font-mono text-zinc-300">tau=0.001, Rsheet=100, Cdensity=1, W=1 -&gt; Ropt~1e4 ohms, Copt~1e-13 F</span>
           </div>
         </div>
       }
     >
       <Row>
         <div>
-          <Label>Capacitance Density (F/um^2)</Label>
-          <NumberInput value={capDensity} onChange={setCapDensity} />
+          <Label>Capacitance Density (fF/um^2)</Label>
+          <NumberInput value={capDensityFf} onChange={setCapDensityFf} />
         </div>
         <div>
           <Label>Sheet Resistance (ohms/square)</Label>
@@ -69,8 +74,8 @@ export function RCAreaOptimizer() {
           <NumberInput value={resistorWidth} onChange={setResistorWidth} />
         </div>
         <div>
-          <Label>Target tau (R*C seconds)</Label>
-          <NumberInput value={tau} onChange={setTau} />
+          <Label>Target tau (R*C microseconds)</Label>
+          <NumberInput value={tauUs} onChange={setTauUs} />
         </div>
       </Row>
       <Row>
