@@ -15,7 +15,7 @@ A beautiful, dark-themed React web application featuring various engineering cal
 - **Bit Inverter**: Reverse bit order (MSB↔LSB) in various bases
 - **K-Map Solver**: Simplify Boolean expressions using Karnaugh maps
 - **Truth Table Generator**: Generate complete truth tables for Boolean expressions
-- **XOR Calculator**: Perform bitwise XOR operations with multi-base support
+- **Generic Bitwise Calculator**: Perform arithmetic and bitwise operations (add, subtract, XOR, XNOR, AND, OR, NAND, NOR) with multi-base support
 
 ### Built-in Documentation
 Each calculator includes:

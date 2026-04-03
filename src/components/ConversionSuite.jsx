@@ -35,7 +35,7 @@ export default function ConversionSuite() {
     ascii: { title: "ASCII ↔ Hex", node: <AsciiHex /> },
     truthtable: { title: "Truth Table", node: <TruthTable /> },
     kmap: { title: "K-Map Solver", node: <KMapSolver /> },
-    xor: { title: "XOR Calculator", node: <XorCalculator /> },
+    xor: { title: "Generic Bitwise Calculator", node: <XorCalculator /> },
     aes: { title: "AES Calculator", node: <AESCalculator /> },
     thermalNoise: { title: "Thermal Noise", node: <ThermalNoise /> },
     rcAreaOptimizer: { title: "RC Area Optimizer", node: <RCAreaOptimizer /> },
